@@ -9,7 +9,7 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Dashboard HC</title>
+    <title>Login - IT Dev.</title>
     <link rel="shortcut icon" href="<?= BASE_URL; ?>/img/it.png">
 
     <!-- Bootstrap CSS (gunakan versi stabil saja satu kali) -->
