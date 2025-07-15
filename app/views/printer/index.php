@@ -121,7 +121,7 @@
                                             <label for="keterangan" class="form-label fw-bold">Keterangan :</label>
                                             <select class="form-select" name="keterangan" id="tambah-keterangan" required>
                                                 <option value="di Agen">di Agen</option>
-                                                <option value="di Agen/Kp">di Agen/Kp</option>
+                                                <option value="di Kp & Opr">di Kp & Opr</option>
                                             </select>
                                         </div>
                                     </div>
