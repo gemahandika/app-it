@@ -100,7 +100,7 @@
                                             <select class="form-select" name="nama_counter" id="tambah-nama_counter" required>
                                                 <option value="Pilih Agen / Kp">- Pilih Data -</option>
                                                 <?php foreach ($data['counter'] as $row): ?>
-                                                    <option value="<?= $row['id_counter']; ?>"><?= $row['nama_counter']; ?></option>
+                                                    <option value="<?= $row['nama_counter']; ?>"><?= $row['nama_counter']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -178,7 +178,7 @@
                                             <select class="form-select" name="nama_counter" id="edit-nama_counter" required>
                                                 <option value="Pilih Agen / Kp">- Pilih Data -</option>
                                                 <?php foreach ($data['counter'] as $row): ?>
-                                                    <option value="<?= $row['id_counter']; ?>"><?= $row['nama_counter']; ?></option>
+                                                    <option value="<?= $row['nama_counter']; ?>"><?= $row['nama_counter']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>

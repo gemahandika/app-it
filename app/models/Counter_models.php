@@ -16,12 +16,11 @@ class Counter_models
         return $this->db->resultSet();
     }
 
-    public function getCustIdByNamaCounter($nama_counter)
+    public function getByNamaCounter($nama)
     {
-        $sql = "SELECT cust_id FROM $this->table WHERE nama_counter = :nama_counter LIMIT 1";
-        $this->db->query($sql);
-        $this->db->bind(':nama_counter', $nama_counter);
-        return $this->db->single(); // ambil satu baris
+        $this->db->query("SELECT * FROM $this->table WHERE nama_counter = :nama_counter");
+        $this->db->bind('nama_counter', $nama);
+        return $this->db->single();
     }
 
 

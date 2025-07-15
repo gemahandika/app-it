@@ -496,12 +496,12 @@ $(document).ready(function () {
   });
 
  $('#tambah-nama_counter').on('change', function () {
-  var idCounter = $(this).val();
+  var namaCounter = $(this).val();
 
   $.ajax({
-    url: BASE_URL + '/printer/getCounterById',
+    url: BASE_URL + '/printer/getCounterByNama',
     type: 'POST',
-    data: { id_counter: idCounter },
+    data: { nama_counter: namaCounter },
     dataType: 'json',
     success: function(response) {
       $('#tambah-cust_id').val(response.cust_id || '');

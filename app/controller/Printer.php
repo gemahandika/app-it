@@ -24,12 +24,22 @@ class Printer extends Controller
         $this->view('printer/index', $data);
         $this->view('templates/footer');
     }
-    public function getCustId()
+    public function getCounterByNama()
     {
-        if (isset($_POST['nama_counter'])) {
-            $nama_counter = $_POST['nama_counter'];
-            $data = $this->model('Counter_models')->getCustIdByNamaCounter($nama_counter);
-            echo json_encode(['cust_id' => $data['cust_id'] ?? null]);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nama = $_POST['nama_counter'];
+            $data = $this->model('Counter_models')->getByNamaCounter($nama);
+
+            // Pastikan datanya bisa di-encode
+            if (!$data) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Data tidak ditemukan']);
+                exit;
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
+            exit;
         }
     }
     public function getCounterById()
