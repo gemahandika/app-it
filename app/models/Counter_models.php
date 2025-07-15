@@ -15,6 +15,16 @@ class Counter_models
         $this->db->query($sql);
         return $this->db->resultSet();
     }
+
+    public function getCustIdByNamaCounter($nama_counter)
+    {
+        $sql = "SELECT cust_id FROM $this->table WHERE nama_counter = :nama_counter LIMIT 1";
+        $this->db->query($sql);
+        $this->db->bind(':nama_counter', $nama_counter);
+        return $this->db->single(); // ambil satu baris
+    }
+
+
     public function countSystemHybrid()
     {
         $this->db->query("SELECT COUNT(*) AS total FROM $this->table WHERE sistem = :sistem");

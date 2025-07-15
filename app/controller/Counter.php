@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class Counter extends Controller
 {
     public function __construct()

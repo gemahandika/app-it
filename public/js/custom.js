@@ -484,4 +484,173 @@ $(document).ready(function () {
     });
   });
 
+
+
+  // ========================================
+  // 18. MODAL TAMBAH PRINTER
+  // ========================================
+  $('#modalTambahPrinter').on('shown.bs.modal', function () {
+  $('#tambah-nama_counter').select2({
+    dropdownParent: $('#modalTambahPrinter'),
+    width: '100%'
+  });
+
+ $('#tambah-nama_counter').on('change', function () {
+  var idCounter = $(this).val();
+
+  $.ajax({
+    url: BASE_URL + '/printer/getCounterById',
+    type: 'POST',
+    data: { id_counter: idCounter },
+    dataType: 'json',
+    success: function(response) {
+      $('#tambah-cust_id').val(response.cust_id || '');
+    },
+    error: function() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal Ambil Data',
+        text: 'ID Counter tidak ditemukan atau server bermasalah.'
+      });
+    }
+  });
+});
+});
+
+  // ========================================
+  // 19. SUBMIT TAMBAH PRINTER
+  // ========================================
+  $(document).on('submit', '#formTambahPrinter', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/printer/tambah',
+      method: 'POST',
+      data: formData,
+      success: function (response) {
+        try {
+          const res = typeof response === 'string' ? JSON.parse(response) : response;
+          if (res.status === 'success') {
+            $('#modalTambahPrinter').modal('hide');
+            Swal.fire({
+              icon: 'success',
+              title: 'Berhasil',
+              text: res.message
+            }).then(() => location.reload());
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal',
+              text: res.message || 'Gagal menyimpan data.'
+            });
+          }
+        } catch (err) {
+          console.error('Respon tidak valid JSON:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Respon dari server tidak dapat dibaca.'
+          });
+        }
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Terjadi kesalahan saat mengirim data.'
+        });
+      }
+    });
+  });
+
+  // ========================================
+  // 20. MODAL EDIT PRINTER
+  // ========================================
+  $(document).on('click', '.btn-editPrinter', function () {
+    const id = $(this).data('id');
+    $.ajax({
+      url: BASE_URL + '/printer/getPrinterById',
+      method: 'POST',
+      data: { id_printer: id },
+      dataType: 'json',
+      success: function (data) {
+        $('#edit-id_printer').val(data.id_printer);
+        $('#edit-serial_number').val(data.serial_number);
+        $('#edit-nama_counter').val(data.nama_counter.trim()).trigger('change');
+        $('#edit-cust_id').val(data.cust_id);
+        $('#edit-status').val(data.status);
+        $('#edit-keterangan').val(data.keterangan);
+        $('#edit-date_distribusi').val(data.date_distribusi);
+        $('#edit-remaks').val(data.remaks);
+
+        const modal = new bootstrap.Modal(document.getElementById('modalEditPrinter'));
+        modal.show();
+
+        $('#modalEditPrinter').on('shown.bs.modal', function () {
+          $('#edit-nama_counter').select2({
+            dropdownParent: $('#modalEditPrinter'),
+            width: '100%'
+          });
+        });
+
+        // 🧠 Ganti counterMap → ambil langsung via AJAX
+        $('#edit-nama_counter').off('change').on('change', function () {
+          const idCounter = $(this).val();
+
+          $.ajax({
+            url: BASE_URL + '/printer/getCounterById',
+            type: 'POST',
+            data: { id_counter: idCounter },
+            dataType: 'json',
+            success: function(response) {
+              $('#edit-cust_id').val(response.cust_id || '');
+            },
+            error: function() {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal Ambil Data',
+                text: 'ID Counter tidak ditemukan atau server bermasalah.'
+              });
+            }
+          });
+        });
+      },
+      error: function (xhr, status, error) {
+        console.error("Gagal ambil data:", error);
+        console.log("Respon server:", xhr.responseText);
+      }
+    });
+  });
+
+
+  // ========================================
+  // 21. SUBMIT EDIT USER HYBRID
+  // ========================================
+  $(document).on('submit', '#formEditPrinter', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/printer/edit',
+      method: 'POST',
+      data: formData,
+      success: function () {
+        $('#modalEditPrinter').modal('hide');
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Data User Hybrid berhasil diperbarui!'
+        }).then(() => location.reload());
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Terjadi kesalahan saat mengupdate data.'
+        });
+      }
+    });
+  });
+
+
+
 });

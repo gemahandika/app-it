@@ -69,6 +69,7 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                     $currentPage = basename($_SERVER['REQUEST_URI']);
                     $isUsers = in_array($currentPage, ['user_hybrid', 'user_sca']);
                     $isCounter = in_array($currentPage, ['counter', 'counter_tutup']);
+                    $isPrinter = in_array($currentPage, ['printer']);
                     ?>
                     <div class="nav">
                         <span class="nav-link mb-4" style="border-bottom: solid 1px white;"><img src="<?= BASE_URL; ?>/img/user.png" alt="JNE Logo" style="height: 30px;" class="me-2"> <?= htmlspecialchars($name) ?></span>
@@ -79,7 +80,7 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                             Dashboard
                         </a>
                         <!-- Data Agen & KP Menu -->
-                        <a class="nav-link <?= $isCounter ? '' : 'collapsed' ?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCounter" aria-expanded="<?= $isCounter ? 'true' : 'false' ?>" aria-controls="collapseKaryawan">
+                        <a class="nav-link <?= $isCounter ? '' : 'collapsed' ?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCounter" aria-expanded="<?= $isCounter ? 'true' : 'false' ?>" aria-controls="collapseCounter">
                             <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                             Data Agen & KP
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -91,15 +92,27 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                             </nav>
                         </div>
                         <!-- Data Users Menu -->
-                        <a class="nav-link <?= $isUsers ? '' : 'collapsed' ?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKaryawan" aria-expanded="<?= $isUsers ? 'true' : 'false' ?>" aria-controls="collapseKaryawan">
+                        <a class="nav-link <?= $isUsers ? '' : 'collapsed' ?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="<?= $isUsers ? 'true' : 'false' ?>" aria-controls="collapseUser">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Data Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse <?= $isUsers ? 'show' : '' ?>" id="collapseKaryawan" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse <?= $isUsers ? 'show' : '' ?>" id="collapseUser" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link <?= $currentPage === 'user_hybrid' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/user_hybrid">User Hybrid</a>
                                 <a class="nav-link <?= $currentPage === 'user_sca' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/user_sca">User SCA</a>
+                            </nav>
+                        </div>
+                        <!-- Data Printer Menu -->
+                        <a class="nav-link <?= $isPrinter ? '' : 'collapsed' ?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePrinter" aria-expanded="<?= $isPrinter ? 'true' : 'false' ?>" aria-controls="collapsePrinter">
+                            <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
+                            Data Printer
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse <?= $isPrinter ? 'show' : '' ?>" id="collapsePrinter" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link <?= $currentPage === 'printer' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/printer">Printer Label</a>
+                                <!-- <a class="nav-link <?= $currentPage === 'user_sca' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/user_sca">User SCA</a> -->
                             </nav>
                         </div>
                         <?php if (isset($data['userRole']) && in_array($data['userRole'], ['superadmin'])) : ?>
