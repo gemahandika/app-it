@@ -111,10 +111,10 @@ class Printer extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'id_printer ' => $_POST['id_printer '],
-                'nama_counter' => $_POST['nama_counter'],
-                'cust_id' => $_POST['cust_id'],
                 'type' => $_POST['type'],
                 'serial_number' => $_POST['serial_number'],
+                'nama_counter' => $_POST['nama_counter'],
+                'cust_id' => $_POST['cust_id'],
                 'status' => $_POST['status'],
                 'keterangan' => $_POST['keterangan'],
                 'date_distribusi' => $_POST['date_distribusi'],
