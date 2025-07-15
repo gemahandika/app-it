@@ -155,7 +155,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                                    <input type="hidden" name="id_printer" id="edit-id_printer" readonly required>
+                                    <input type="text" name="id_printer" id="edit-id_printer" readonly required>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="type" class="form-label fw-bold">Type :</label>

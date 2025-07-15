@@ -638,7 +638,7 @@ $(document).ready(function () {
         Swal.fire({
           icon: 'success',
           title: 'Berhasil',
-          text: 'Data User Hybrid berhasil diperbarui!'
+          text: 'Data Printer berhasil diperbarui!'
         }).then(() => location.reload());
       },
       error: function () {
