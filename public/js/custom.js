@@ -595,12 +595,12 @@ $(document).ready(function () {
 
         // 🧠 Ganti counterMap → ambil langsung via AJAX
         $('#edit-nama_counter').off('change').on('change', function () {
-          const idCounter = $(this).val();
+          const namaCounter = $(this).val();
 
           $.ajax({
-            url: BASE_URL + '/printer/getCounterById',
+            url: BASE_URL + '/printer/getCounterByNama',
             type: 'POST',
-            data: { id_counter: idCounter },
+            data: { nama_counter: namaCounter },
             dataType: 'json',
             success: function(response) {
               $('#edit-cust_id').val(response.cust_id || '');
