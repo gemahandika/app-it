@@ -102,15 +102,11 @@ class Printer extends Controller
             exit;
         }
     }
-    public function edit()
+    public function editPrinter()
     {
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
-                'id_printer ' => $_POST['id_printer '],
+                'id_printer' => $_POST['id_printer'],
                 'type' => $_POST['type'],
                 'serial_number' => $_POST['serial_number'],
                 'nama_counter' => $_POST['nama_counter'],

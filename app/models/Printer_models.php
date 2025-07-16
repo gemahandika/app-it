@@ -70,7 +70,7 @@ class Printer_models
     }
     public function updatePrinter($data)
     {
-        $query = "UPDATE {$this->table} SET 
+        $query = "UPDATE $this->table SET 
             type = :type,
             serial_number = :serial_number,
             nama_counter = :nama_counter,

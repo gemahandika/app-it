@@ -575,6 +575,7 @@ $(document).ready(function () {
       dataType: 'json',
       success: function (data) {
         $('#edit-id_printer').val(data.id_printer);
+        $('#edit-type').val(data.type);
         $('#edit-serial_number').val(data.serial_number);
         $('#edit-nama_counter').val(data.nama_counter.trim()).trigger('change');
         $('#edit-cust_id').val(data.cust_id);
@@ -630,7 +631,7 @@ $(document).ready(function () {
     e.preventDefault();
     const formData = $(this).serialize();
     $.ajax({
-      url: BASE_URL + '/printer/edit',
+      url: BASE_URL + '/printer/editPrinter',
       method: 'POST',
       data: formData,
       success: function () {
@@ -650,7 +651,4 @@ $(document).ready(function () {
       }
     });
   });
-
-
-
 });

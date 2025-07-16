@@ -149,13 +149,13 @@
                 <div class="modal fade" id="modalEditPrinter" tabindex="-1" aria-labelledby="modalEditPrinterLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
-                            <form action="<?= BASE_URL; ?>/printer/edit" id="formEditPrinter" method="POST">
+                            <form action="<?= BASE_URL; ?>/printer/editPrinter" id="formEditPrinter" method="POST">
                                 <div class="modal-header bg-cantik text-white">
                                     <h5 class="modal-title" id="modalEditPrinterLabel">Edit Data Printer</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                                    <input type="text" name="id_printer" id="edit-id_printer" readonly required>
+                                    <input type="hidden" name="id_printer" id="edit-id_printer" readonly required>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="type" class="form-label fw-bold">Type :</label>
@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn bg-cantik text-white button-cantik">Create</button>
+                                    <button type="submit" class="btn bg-cantik text-white button-cantik">Update</button>
                                 </div>
                             </form>
                         </div>
