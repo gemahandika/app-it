@@ -490,32 +490,32 @@ $(document).ready(function () {
   // 18. MODAL TAMBAH PRINTER
   // ========================================
   $('#modalTambahPrinter').on('shown.bs.modal', function () {
-  $('#tambah-nama_counter').select2({
-    dropdownParent: $('#modalTambahPrinter'),
-    width: '100%'
-  });
+    $('#tambah-nama_counter').select2({
+      dropdownParent: $('#modalTambahPrinter'),
+      width: '100%'
+    });
 
- $('#tambah-nama_counter').on('change', function () {
-  var namaCounter = $(this).val();
+    $('#tambah-nama_counter').on('change', function () {
+      var namaCounter = $(this).val();
 
-  $.ajax({
-    url: BASE_URL + '/printer/getCounterByNama',
-    type: 'POST',
-    data: { nama_counter: namaCounter },
-    dataType: 'json',
-    success: function(response) {
-      $('#tambah-cust_id').val(response.cust_id || '');
-    },
-    error: function() {
-      Swal.fire({
-        icon: 'error',
-        title: 'Gagal Ambil Data',
-        text: 'ID Counter tidak ditemukan atau server bermasalah.'
+      $.ajax({
+        url: BASE_URL + '/printer/getCounterByNama',
+        type: 'POST',
+        data: { nama_counter: namaCounter },
+        dataType: 'json',
+        success: function(response) {
+          $('#tambah-cust_id').val(response.cust_id || '');
+        },
+        error: function() {
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Ambil Data',
+            text: 'ID Counter tidak ditemukan atau server bermasalah.'
+          });
+        }
       });
-    }
+    });
   });
-});
-});
 
   // ========================================
   // 19. SUBMIT TAMBAH PRINTER
@@ -625,7 +625,7 @@ $(document).ready(function () {
 
 
   // ========================================
-  // 21. SUBMIT EDIT USER HYBRID
+  // 21. SUBMIT EDIT PRINTER
   // ========================================
   $(document).on('submit', '#formEditPrinter', function (e) {
     e.preventDefault();
@@ -651,4 +651,71 @@ $(document).ready(function () {
       }
     });
   });
+
+  // ========================================
+  // 22. MODAL TAMBAH SERVICE PRINTER
+  // ========================================
+  $('#modalServicePrinter').on('shown.bs.modal', function () {
+    $('#tambah-serial_number').select2({
+      dropdownParent: $('#modalServicePrinter'),
+      width: '100%'
+    });
+
+    $('#tambah-serial_number').on('change', function () {
+      var serial_number = $(this).val();
+
+      $.ajax({
+        url: BASE_URL + '/print_service/getPrinterBysn',
+        type: 'POST',
+        data: { serial_number: serial_number },
+        dataType: 'json',
+        success: function(response) {
+          $('#tambah-type').val(response.type || '');
+          $('#tambah-nama_counter').val(response.nama_counter || '');
+          $('#tambah-cust_id').val(response.cust_id || '');
+          $('#tambah-status').val(response.status || '');
+        },
+        error: function() {
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Ambil Data',
+            text: 'Serial Number tidak ditemukan atau server bermasalah.'
+          });
+        }
+      });
+    });
+  });
+
+   // ========================================
+  // 21. SUBMIT EDIT PRINTER SERVICE
+  // ========================================
+  $(document).on('submit', '#formServicePrinter', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/print_service/tambah',
+      method: 'POST',
+      data: formData,
+      success: function () {
+        $('#modalServicePrinter').modal('hide');
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Data Berhasil ditambah!'
+        }).then(() => location.reload());
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Terjadi kesalahan saat mengupdate data.'
+        });
+      }
+    });
+  });
+
+
+
+
+
 });

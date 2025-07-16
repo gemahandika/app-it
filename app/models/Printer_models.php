@@ -11,9 +11,21 @@ class Printer_models
     }
     public function getAllPrinter()
     {
-        $sql = "SELECT * FROM $this->table ORDER BY id_printer DESC";
+        $sql = "SELECT * FROM $this->table WHERE keterangan != 'di Service' ORDER BY id_printer DESC";
         $this->db->query($sql);
         return $this->db->resultSet();
+    }
+    public function getAllPrinterService()
+    {
+        $sql = "SELECT * FROM $this->table WHERE keterangan = 'di Service' ORDER BY id_printer DESC";
+        $this->db->query($sql);
+        return $this->db->resultSet();
+    }
+    public function getBySerialNumber($serial_number)
+    {
+        $this->db->query("SELECT * FROM $this->table WHERE serial_number = :serial_number");
+        $this->db->bind('serial_number', $serial_number);
+        return $this->db->single();
     }
     public function addPrinter($data)
     {
@@ -62,24 +74,13 @@ class Printer_models
             exit;
         }
     }
-    public function getById($id)
-    {
-        $this->db->query("SELECT * FROM $this->table WHERE id_printer = :id");
-        $this->db->bind('id', $id);
-        return $this->db->single();
-    }
-    public function updatePrinter($data)
+    public function addPrinterService($data)
     {
         $query = "UPDATE $this->table SET 
-            type = :type,
-            serial_number = :serial_number,
-            nama_counter = :nama_counter,
-            cust_id = :cust_id,
-            status = :status,
             keterangan = :keterangan,
-            date_distribusi = :date_distribusi,
+            date_service = :date_service,
             remaks = :remaks
-          WHERE id_printer = :id_printer";
+          WHERE serial_number = :serial_number";
 
         $this->db->query($query);
 
@@ -88,5 +89,11 @@ class Printer_models
         }
 
         return $this->db->execute(); // pastikan ini ada untuk menjalankan query
+    }
+    public function getById($id)
+    {
+        $this->db->query("SELECT * FROM $this->table WHERE id_printer = :id");
+        $this->db->bind('id', $id);
+        return $this->db->single();
     }
 }

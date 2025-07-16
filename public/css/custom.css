@@ -27,6 +27,15 @@ body {
     background-color: rgb(38, 143, 161);
 }
 
+.bg-print {
+  background-color: rgb(26, 13, 88);
+   /* pink lembut misalnya */
+}
+.print-hover:hover {
+    background-color: rgb(50, 38, 161);
+}
+
+
 .select2-container--default .select2-selection--single {
   height: 38px !important;
   line-height: 1.5;

@@ -1,10 +1,10 @@
 <main>
     <div class="container-fluid px-4">
-        <h5 class="mt-4 fw-bold" style="border-bottom: 1px solid black;">Data Printer Label</h5>
+        <h5 class="mt-4 fw-bold" style="border-bottom: 1px solid black;">Data Service Printer Label </h5>
         <div class="card mb-4 mt-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="d-flex flex-wrap gap-2">
-                    <button class="btn bg-cantik text-white btn-sm button-cantik" data-bs-toggle="modal" data-bs-target="#modalTambahPrinter">
+                    <button class="btn bg-cantik text-white btn-sm button1-hover" data-bs-toggle="modal" data-bs-target="#modalServicePrinter">
                         <i class="fa fa-plus"></i> Tambah Data
                     </button>
                 </div>
@@ -56,7 +56,6 @@
                                 <th class="small text-center">KETERANGAN</th>
                                 <th class="small text-center">DATE DISTRIBUSI</th>
                                 <th class="small text-center">REMAKS</th>
-
                             </tr>
                         </thead>
                         <tbody id="karyawanResult">
@@ -68,77 +67,63 @@
                     </table>
                 </div>
 
-                <!-- Modal Tanbah -->
-                <div class="modal fade" id="modalTambahPrinter" tabindex="-1" aria-labelledby="modalTambahPrinterLabel" aria-hidden="true">
+                <!-- Modal Tanbah Service Printer -->
+                <div class="modal fade" id="modalServicePrinter" tabindex="-1" aria-labelledby="modalServicePrinterLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
-                            <form action="<?= BASE_URL; ?>/printer/tambah" id="formTambahPrinter" method="POST">
+                            <form action="<?= BASE_URL; ?>/print_service/tambah" id="formServicePrinter" method="POST">
                                 <div class="modal-header bg-cantik text-white">
-                                    <h5 class="modal-title" id="modalTambahPrinterLabel">Tambah Data Printer</h5>
+                                    <h5 class="modal-title" id="modalServicePrinterLabel">Tambah Data Printer Service</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="type" class="form-label fw-bold">Type :</label>
-                                            <select class="form-select" name="type" id="tambah-type" required>
-                                                <option value="OX-130">OX-130</option>
-                                                <option value="CP-2240">CP-2240</option>
-                                                <option value="OS-200">OS-200</option>
-                                                <option value="OS-241NU">OS-241NU</option>
-                                                <option value="LAINNYA">LAINNYA</option>
+                                            <label for="serial_number" class="form-label fw-bold">Serial Number :</label>
+                                            <select class="form-select fw-bold" name="serial_number" id="tambah-serial_number" required>
+                                                <option value="">- Pilih Serial Number-</option>
+                                                <?php foreach ($data['sn'] as $row): ?>
+                                                    <option value="<?= $row['serial_number']; ?>"><?= $row['serial_number']; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
-                                            <label for="serial_number" class="form-label fw-bold">Serial Number :</label>
-                                            <input type="text" name="serial_number" id="tambah-serial_number" class="form-control" required>
+                                            <label for="type" class="form-label fw-bold">Type :</label>
+                                            <input type="text" name="type" id="tambah-type" class="form-control fw-bold" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="nama_counter" class="form-label fw-bold">Nama Agen / Kp : </label>
-                                            <select class="form-select" name="nama_counter" id="tambah-nama_counter" required>
-                                                <option value="Pilih Agen / Kp">- Pilih Data -</option>
-                                                <?php foreach ($data['counter'] as $row): ?>
-                                                    <option value="<?= $row['nama_counter']; ?>"><?= $row['nama_counter']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+                                            <input type="text" name="nama_counter" id="tambah-nama_counter" class="form-control fw-bold" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="cust_id" class="form-label fw-bold">Cust ID :</label>
-                                            <input type="text" name="cust_id" id="tambah-cust_id" class="form-control" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
+                                            <input type="text" name="cust_id" id="tambah-cust_id" class="form-control fw-bold" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="status" class="form-label fw-bold">Status :</label>
-                                            <select class="form-select" name="status" id="tambah-status" required>
-                                                <option value="di Pinjamkan">di Pinjamkan</option>
-                                                <option value="Pribadi">Pribadi</option>
-                                            </select>
+                                            <input type="text" name="status" id="tambah-status" class="form-control fw-bold" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="keterangan" class="form-label fw-bold">Keterangan :</label>
-                                            <select class="form-select" name="keterangan" id="tambah-keterangan" required>
-                                                <option value="di Agen">di Agen</option>
-                                                <option value="di Kp & Opr">di Kp & Opr</option>
-                                            </select>
+                                            <label for="date_service" class="form-label fw-bold">Tanggal Service :</label>
+                                            <input type="date" name="date_service" id="tambah-date_service" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="date_distribusi" class="form-label fw-bold">Tanggal Distribusi :</label>
-                                            <input type="date" name="date_distribusi" id="tambah-date_distribusi" class="form-control" required>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
                                             <label for="remaks" class="form-label fw-bold">Remaks :</label>
-                                            <input type="text" name="remaks" id="tambah-remaks" class="form-control" min="0" required>
+                                            <input type="text" name="remaks" id="tambah-remaks" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn bg-cantik text-white button-cantik">Create</button>
+                                    <button type="submit" class="btn bg-cantik text-white button-cantik">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -146,7 +131,7 @@
                 </div>
 
                 <!-- Modal EDIT -->
-                <div class="modal fade" id="modalEditPrinter" tabindex="-1" aria-labelledby="modalEditPrinterLabel" aria-hidden="true">
+                <!-- <div class="modal fade" id="modalEditPrinter" tabindex="-1" aria-labelledby="modalEditPrinterLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <form action="<?= BASE_URL; ?>/printer/editPrinter" id="formEditPrinter" method="POST">
@@ -184,7 +169,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="cust_id" class="form-label fw-bold">Cust ID :</label>
-                                            <input type="text" name="cust_id" id="edit-cust_id" class="form-control" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
+                                            <input type="text" name="cust_id" id="edit-cust_id" class="form-control" required readonly>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -221,7 +206,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
             </div>

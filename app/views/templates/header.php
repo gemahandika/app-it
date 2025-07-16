@@ -69,7 +69,7 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                     $currentPage = basename($_SERVER['REQUEST_URI']);
                     $isUsers = in_array($currentPage, ['user_hybrid', 'user_sca']);
                     $isCounter = in_array($currentPage, ['counter', 'counter_tutup']);
-                    $isPrinter = in_array($currentPage, ['printer']);
+                    $isPrinter = in_array($currentPage, ['printer', 'print_service', 'stok']);
                     ?>
                     <div class="nav">
                         <span class="nav-link mb-4" style="border-bottom: solid 1px white;"><img src="<?= BASE_URL; ?>/img/user.png" alt="JNE Logo" style="height: 30px;" class="me-2"> <?= htmlspecialchars($name) ?></span>
@@ -111,8 +111,9 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                         </a>
                         <div class="collapse <?= $isPrinter ? 'show' : '' ?>" id="collapsePrinter" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link <?= $currentPage === 'printer' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/printer">Printer Label</a>
-                                <!-- <a class="nav-link <?= $currentPage === 'user_sca' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/user_sca">User SCA</a> -->
+                                <a class="nav-link <?= $currentPage === 'printer' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/printer">Distribusi</a>
+                                <a class="nav-link <?= $currentPage === 'print_service' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/print_service">Service</a>
+                                <a class="nav-link <?= $currentPage === 'print_stok' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/print_stok">Stok</a>
                             </nav>
                         </div>
                         <?php if (isset($data['userRole']) && in_array($data['userRole'], ['superadmin'])) : ?>
