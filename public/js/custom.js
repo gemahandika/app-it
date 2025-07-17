@@ -22,7 +22,7 @@ $(document).ready(function () {
     //     leftColumns: 3 // Kolom "Action" di sebelah kiri akan dibekukan
     // },
     initComplete: function () {
-        if (window.location.pathname.includes('/karyawan')) {
+        if (window.location.pathname.includes('/counter')) {
             setTimeout(() => {
                 Swal.close();
             }, 400);

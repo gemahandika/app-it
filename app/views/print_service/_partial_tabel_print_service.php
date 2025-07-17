@@ -6,9 +6,9 @@ if (!empty($printer)) : ?>
         <tr>
             <td class="small text-center"><?= $no++ ?></td>
             <td class="d-flex gap-2">
-                <!-- <button class="btn bg-ungu button1-hover text-white btn-sm btn-editPrinter" data-id="<?= $printer['id_printer']; ?>">
+                <button class="btn bg-ungu button1-hover text-white btn-sm btn-editPrinter" data-id="<?= $printer['id_printer']; ?>">
                     <i class="fa fa-edit"></i> Edit
-                </button> -->
+                </button>
             </td>
             <td class="small text-center"><?= $printer['type'] ?></td>
             <td class="small text-center"><?= $printer['serial_number'] ?></td>
