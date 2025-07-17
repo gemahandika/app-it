@@ -18,6 +18,7 @@ class Print_service extends Controller
         // Data Filter
         $data['sn'] = $this->model('Printer_models')->getAllPrinter();
         $data['printer'] = $this->model('Printer_models')->getAllPrinterService();
+        $data['counter'] = $this->model('Counter_models')->getAllCounter();
         $data['cabang'] = $this->model('Cabang_models')->getAllCabang();
         // Load view
         $this->view('templates/header', $data);
@@ -29,6 +30,24 @@ class Print_service extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $serial_number = $_POST['serial_number'];
             $data = $this->model('Printer_models')->getBySerialNumber($serial_number);
+
+            // Pastikan datanya bisa di-encode
+            if (!$data) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Data tidak ditemukan']);
+                exit;
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
+            exit;
+        }
+    }
+    public function getPrinterById()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id_printer'];
+            $data = $this->model('Printer_models')->getById($id);
 
             // Pastikan datanya bisa di-encode
             if (!$data) {
@@ -56,6 +75,32 @@ class Print_service extends Controller
                 Flasher::setFlash('berhasil', 'ditambahkan', 'success');
             } else {
                 Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            }
+
+            header('Location: ' . BASE_URL . '/print_service');
+            exit;
+        }
+    }
+
+    public function edit()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'id_printer' => $_POST['id_printer'],
+                'type' => $_POST['type'],
+                'serial_number' => $_POST['serial_number'],
+                'nama_counter' => $_POST['nama_counter'],
+                'cust_id' => $_POST['cust_id'],
+                'status' => $_POST['status'],
+                'keterangan' => $_POST['keterangan'],
+                'date_service' => $_POST['date_service'],
+                'remaks' => $_POST['remaks']
+            ];
+
+            if ($this->model('Printer_models')->updatePrinterService($data) > 0) {
+                Flasher::setFlash('berhasil', 'diupdate', 'success');
+            } else {
+                Flasher::setFlash('gagal', 'diupdate', 'danger');
             }
 
             header('Location: ' . BASE_URL . '/print_service');

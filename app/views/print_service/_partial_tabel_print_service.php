@@ -6,7 +6,7 @@ if (!empty($printer)) : ?>
         <tr>
             <td class="small text-center"><?= $no++ ?></td>
             <td class="d-flex gap-2">
-                <button class="btn bg-ungu button1-hover text-white btn-sm btn-editPrinter" data-id="<?= $printer['id_printer']; ?>">
+                <button class="btn bg-ungu button1-hover text-white btn-sm btn-editPrintService" data-id="<?= $printer['id_printer']; ?>">
                     <i class="fa fa-edit"></i> Edit
                 </button>
             </td>
@@ -16,7 +16,7 @@ if (!empty($printer)) : ?>
             <td class="small text-center"><?= $printer['cust_id'] ?></td>
             <td class="small text-center"><?= $printer['status'] ?></td>
             <td class="small text-center"><?= $printer['keterangan'] ?></td>
-            <td class="small text-center"><?= $printer['date_distribusi'] ?></td>
+            <td class="small text-center"><?= $printer['date_service'] ?></td>
             <td class="small text-center"><?= $printer['remaks'] ?></td>
         </tr>
     <?php endforeach; ?>

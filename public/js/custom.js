@@ -687,7 +687,7 @@ $(document).ready(function () {
   });
 
    // ========================================
-  // 21. SUBMIT EDIT PRINTER SERVICE
+  // 21. SUBMIT TAMBAH PRINTER SERVICE
   // ========================================
   $(document).on('submit', '#formServicePrinter', function (e) {
     e.preventDefault();
@@ -715,6 +715,95 @@ $(document).ready(function () {
   });
 
 
+  // ========================================
+  // 22. MODAL EDIT PRINTER SERVICE
+  // ========================================
+  $(document).on('click', '.btn-editPrintService', function () {
+    const id = $(this).data('id');
+    $.ajax({
+      url: BASE_URL + '/print_service/getPrinterById',
+      method: 'POST',
+      data: { id_printer: id },
+      dataType: 'json',
+      success: function (data) {
+        $('#edit-id_printer').val(data.id_printer);
+        $('#edit-type').val(data.type);
+        $('#edit-serial_number').val(data.serial_number);
+        $('#edit-nama_counter').val(data.nama_counter.trim()).trigger('change');
+        $('#edit-cust_id').val(data.cust_id);
+        $('#edit-status').val(data.status);
+        $('#edit-keterangan').val(data.keterangan);
+        $('#edit-date_distribusi').val(data.date_distribusi);
+        $('#edit-remaks').val(data.remaks);
+
+        const modal = new bootstrap.Modal(document.getElementById('modalEditService'));
+        modal.show();
+
+        $('#modalEditService').on('shown.bs.modal', function () {
+          $('#edit-nama_counter').select2({
+            dropdownParent: $('#modalEditService'),
+            width: '100%'
+          });
+        });
+
+        // 🧠 Ganti counterMap → ambil langsung via AJAX
+        $('#edit-nama_counter').off('change').on('change', function () {
+          const namaCounter = $(this).val();
+
+          $.ajax({
+            url: BASE_URL + '/printer/getCounterByNama',  // ⬅️ ini ngambil dari controller printer
+            type: 'POST',
+            data: { nama_counter: namaCounter },
+            dataType: 'json',
+            success: function(response) {
+              $('#edit-cust_id').val(response.cust_id || '');
+            },
+            error: function() {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal Ambil Data',
+                text: 'ID Counter tidak ditemukan atau server bermasalah.'
+              });
+            }
+          });
+        });
+
+      },
+      error: function (xhr, status, error) {
+      console.error("Gagal ambil data:", error);
+      console.log("Respon server:", xhr.responseText); // ⬅️ ini bantu lihat error PHP
+      }
+    });
+  });
+
+
+  // ========================================
+  // 23. SUBMIT EDIT PRINTER SERVICE
+  // ========================================
+  $(document).on('submit', '#formEditService', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/print_service/edit',
+      method: 'POST',
+      data: formData,
+      success: function () {
+        $('#modalEditService').modal('hide');
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Data Printer berhasil diperbarui!'
+        }).then(() => location.reload());
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Terjadi kesalahan saat mengupdate data.'
+        });
+      }
+    });
+  });
 
 
 

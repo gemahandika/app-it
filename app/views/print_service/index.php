@@ -54,20 +54,20 @@
                                 <th class="small text-center">CUST ID</th>
                                 <th class="small text-center">STATUS</th>
                                 <th class="small text-center">KETERANGAN</th>
-                                <th class="small text-center">DATE DISTRIBUSI</th>
+                                <th class="small text-center">DATE SERVICE</th>
                                 <th class="small text-center">REMAKS</th>
                             </tr>
                         </thead>
                         <tbody id="karyawanResult">
                             <?php
                             extract($data);
-                            require_once '../app/views/printer/_partial_tabel_printer.php';
+                            require_once '../app/views/print_service/_partial_tabel_print_service.php';
                             ?>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Modal Tanbah Service Printer -->
+                <!-- Modal Tambah Service Printer -->
                 <div class="modal fade" id="modalServicePrinter" tabindex="-1" aria-labelledby="modalServicePrinterLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
@@ -131,12 +131,12 @@
                 </div>
 
                 <!-- Modal EDIT -->
-                <!-- <div class="modal fade" id="modalEditPrinter" tabindex="-1" aria-labelledby="modalEditPrinterLabel" aria-hidden="true">
+                <div class="modal fade" id="modalEditService" tabindex="-1" aria-labelledby="modalEditServiceLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
-                            <form action="<?= BASE_URL; ?>/printer/editPrinter" id="formEditPrinter" method="POST">
+                            <form action="<?= BASE_URL; ?>/print_service/edit" id="formEditService" method="POST">
                                 <div class="modal-header bg-cantik text-white">
-                                    <h5 class="modal-title" id="modalEditPrinterLabel">Edit Data Printer</h5>
+                                    <h5 class="modal-title" id="modalEditServiceLabel">Edit Data Printer Service</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
@@ -169,7 +169,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="cust_id" class="form-label fw-bold">Cust ID :</label>
-                                            <input type="text" name="cust_id" id="edit-cust_id" class="form-control" required readonly>
+                                            <input type="text" name="cust_id" id="edit-cust_id" class="form-control" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -183,6 +183,7 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="keterangan" class="form-label fw-bold">Keterangan :</label>
                                             <select class="form-select" name="keterangan" id="edit-keterangan" required>
+                                                <option value="di Service">di Service</option>
                                                 <option value="di Agen">di Agen</option>
                                                 <option value="di Kp & Opr">di Kp & Opr</option>
                                             </select>
@@ -206,7 +207,7 @@
                             </form>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
 
             </div>

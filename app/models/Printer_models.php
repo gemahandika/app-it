@@ -117,4 +117,25 @@ class Printer_models
 
         return $this->db->execute(); // pastikan ini ada untuk menjalankan query
     }
+    public function updatePrinterService($data)
+    {
+        $query = "UPDATE {$this->table} SET 
+            type = :type,
+            serial_number = :serial_number,
+            nama_counter = :nama_counter,
+            cust_id = :cust_id,
+            status = :status,
+            keterangan = :keterangan,
+            date_service = :date_service,
+            remaks = :remaks
+          WHERE id_printer = :id_printer";
+
+        $this->db->query($query);
+
+        foreach ($data as $key => $val) {
+            $this->db->bind($key, $val); // ✅ benar: tanpa titik dua
+        }
+
+        return $this->db->execute(); // pastikan ini ada untuk menjalankan query
+    }
 }
