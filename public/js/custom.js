@@ -736,7 +736,7 @@ $(document).ready(function () {
         $('#edit-cust_id').val(data.cust_id);
         $('#edit-status').val(data.status);
         $('#edit-keterangan').val(data.keterangan);
-        $('#edit-date_distribusi').val(data.date_distribusi);
+        $('#edit-date_service').val(data.date_service);
         $('#edit-remaks').val(data.remaks);
 
         const modal = new bootstrap.Modal(document.getElementById('modalEditService'));

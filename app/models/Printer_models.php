@@ -17,7 +17,7 @@ class Printer_models
     }
     public function getAllPrinterService()
     {
-        $sql = "SELECT * FROM $this->table WHERE keterangan = 'di Service' ORDER BY id_printer DESC";
+        $sql = "SELECT * FROM $this->table WHERE keterangan = 'di Service' ORDER BY date_service ASC";
         $this->db->query($sql);
         return $this->db->resultSet();
     }

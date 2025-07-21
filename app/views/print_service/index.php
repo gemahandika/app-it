@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-12 mb-3">
                                             <label for="remaks" class="form-label fw-bold">Remaks :</label>
                                             <input type="text" name="remaks" id="tambah-remaks" class="form-control" required>
                                         </div>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <!-- Modal EDIT -->
+                <!-- Modal EDIT service -->
                 <div class="modal fade" id="modalEditService" tabindex="-1" aria-labelledby="modalEditServiceLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
@@ -190,8 +190,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="date_distribusi" class="form-label fw-bold">Tanggal Distribusi :</label>
-                                            <input type="date" name="date_distribusi" id="edit-date_distribusi" class="form-control" required>
+                                            <label for="date_service" class="form-label fw-bold">Tanggal service :</label>
+                                            <input type="date" name="date_service" id="edit-date_service" class="form-control" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="date_terima" class="form-label fw-bold">Tanggal Diterima :</label>
@@ -199,7 +199,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-12 mb-3">
                                             <label for="remaks" class="form-label fw-bold">Remaks :</label>
                                             <input type="text" name="remaks" id="edit-remaks" class="form-control" min="0" required>
                                         </div>
