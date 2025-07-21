@@ -80,22 +80,6 @@
                                 <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="type" class="form-label fw-bold">Type :</label>
-                                            <select class="form-select" name="type" id="tambah-type" required>
-                                                <option value="OX-130">OX-130</option>
-                                                <option value="CP-2240">CP-2240</option>
-                                                <option value="OS-200">OS-200</option>
-                                                <option value="OS-241NU">OS-241NU</option>
-                                                <option value="LAINNYA">LAINNYA</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="serial_number" class="form-label fw-bold">Serial Number :</label>
-                                            <input type="text" name="serial_number" id="tambah-serial_number" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
                                             <label for="nama_counter" class="form-label fw-bold">Nama Agen / Kp : </label>
                                             <select class="form-select" name="nama_counter" id="tambah-nama_counter" required>
                                                 <option value="Pilih Agen / Kp">- Pilih Data -</option>
@@ -108,21 +92,34 @@
                                             <label for="cust_id" class="form-label fw-bold">Cust ID :</label>
                                             <input type="text" name="cust_id" id="tambah-cust_id" class="form-control" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="status" class="form-label fw-bold">Status :</label>
-                                            <select class="form-select" name="status" id="tambah-status" required>
-                                                <option value="di Pinjamkan">di Pinjamkan</option>
-                                                <option value="Pribadi">Pribadi</option>
+                                            <label for="serial_number" class="form-label fw-bold">Serial Number :</label>
+                                            <select class="form-select" name="serial_number" id="tambah-serial_number" required>
+                                                <option value="">- Pilih Serial Number-</option>
+                                                <?php foreach ($data['sn'] as $row): ?>
+                                                    <option value="<?= $row['serial_number']; ?>"><?= $row['serial_number']; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="type" class="form-label fw-bold">Type :</label>
+                                            <input type="text" name="type" id="tambah-type" class="form-control" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="keterangan" class="form-label fw-bold">Keterangan :</label>
                                             <select class="form-select" name="keterangan" id="tambah-keterangan" required>
                                                 <option value="di Agen">di Agen</option>
                                                 <option value="di Kp & Opr">di Kp & Opr</option>
                                             </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="status" class="form-label fw-bold">Status :</label>
+                                            <input type="text" name="status" id="tambah-status" class="form-control" style="background-color: rgba(145, 53, 220, 0.3);" required readonly>
                                         </div>
                                     </div>
                                     <div class="row">

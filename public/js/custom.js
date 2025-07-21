@@ -487,7 +487,7 @@ $(document).ready(function () {
 
 
   // ========================================
-  // 18. MODAL TAMBAH PRINTER
+  // 18. MODAL DISTRIBUSI PRINTER
   // ========================================
   $('#modalTambahPrinter').on('shown.bs.modal', function () {
     $('#tambah-nama_counter').select2({
@@ -515,10 +515,31 @@ $(document).ready(function () {
         }
       });
     });
+     $('#tambah-serial_number').on('change', function () {
+      var serial_number = $(this).val();
+
+      $.ajax({
+        url: BASE_URL + '/printer/getPrinterBysn',
+        type: 'POST',
+        data: { serial_number: serial_number },
+        dataType: 'json',
+        success: function(response) {
+          $('#tambah-type').val(response.type || '');
+          $('#tambah-status').val(response.status || '');
+        },
+        error: function() {
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Ambil Data',
+            text: 'Serial Number tidak ditemukan atau server bermasalah.'
+          });
+        }
+      });
+    });
   });
 
   // ========================================
-  // 19. SUBMIT TAMBAH PRINTER
+  // 19. SUBMIT DISTRIBUSI PRINTER
   // ========================================
   $(document).on('submit', '#formTambahPrinter', function (e) {
     e.preventDefault();
@@ -527,37 +548,19 @@ $(document).ready(function () {
       url: BASE_URL + '/printer/tambah',
       method: 'POST',
       data: formData,
-      success: function (response) {
-        try {
-          const res = typeof response === 'string' ? JSON.parse(response) : response;
-          if (res.status === 'success') {
-            $('#modalTambahPrinter').modal('hide');
-            Swal.fire({
-              icon: 'success',
-              title: 'Berhasil',
-              text: res.message
-            }).then(() => location.reload());
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Gagal',
-              text: res.message || 'Gagal menyimpan data.'
-            });
-          }
-        } catch (err) {
-          console.error('Respon tidak valid JSON:', err);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Respon dari server tidak dapat dibaca.'
-          });
-        }
+      success: function () {
+        $('#modalTambahPrinter').modal('hide');
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Data Printer berhasil diperbarui!'
+        }).then(() => location.reload());
       },
       error: function () {
         Swal.fire({
           icon: 'error',
-          title: 'Server Error',
-          text: 'Terjadi kesalahan saat mengirim data.'
+          title: 'Gagal',
+          text: 'Terjadi kesalahan saat mengupdate data.'
         });
       }
     });
@@ -776,7 +779,6 @@ $(document).ready(function () {
     });
   });
 
-
   // ========================================
   // 23. SUBMIT EDIT PRINTER SERVICE
   // ========================================
@@ -800,6 +802,59 @@ $(document).ready(function () {
           icon: 'error',
           title: 'Gagal',
           text: 'Terjadi kesalahan saat mengupdate data.'
+        });
+      }
+    });
+  });
+
+
+
+
+  // ========================================
+  // 24. MODAL STOK PRINTER
+  // ========================================
+
+  // ========================================
+  // 25. SUBMIT TAMBAH PRINTER
+  // ========================================
+  $(document).on('submit', '#formStokPrinter', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/print_stok/tambah',
+      method: 'POST',
+      data: formData,
+      success: function (response) {
+        try {
+          const res = typeof response === 'string' ? JSON.parse(response) : response;
+          if (res.status === 'success') {
+            $('#modalStokPrinter').modal('hide');
+            Swal.fire({
+              icon: 'success',
+              title: 'Berhasil',
+              text: res.message
+            }).then(() => location.reload());
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal',
+              text: res.message || 'Gagal menyimpan data.'
+            });
+          }
+        } catch (err) {
+          console.error('Respon tidak valid JSON:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Respon dari server tidak dapat dibaca.'
+          });
+        }
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Terjadi kesalahan saat mengirim data.'
         });
       }
     });

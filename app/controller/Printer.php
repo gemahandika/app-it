@@ -16,6 +16,7 @@ class Printer extends Controller
         $data['username'] = $_SESSION['username'] ?? '';
         $data['userRole'] = $_SESSION['role'] ?? '';
         // Data Filter
+        $data['sn'] = $this->model('Printer_models')->getAllPrinterStok();
         $data['printer'] = $this->model('Printer_models')->getAllPrinter();
         $data['counter'] = $this->model('Counter_models')->getAllCounter();
         $data['cabang'] = $this->model('Cabang_models')->getAllCabang();
@@ -29,6 +30,24 @@ class Printer extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nama = $_POST['nama_counter'];
             $data = $this->model('Counter_models')->getByNamaCounter($nama);
+
+            // Pastikan datanya bisa di-encode
+            if (!$data) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Data tidak ditemukan']);
+                exit;
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
+            exit;
+        }
+    }
+    public function getPrinterBysn()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $serial_number = $_POST['serial_number'];
+            $data = $this->model('Printer_models')->getBySerialNumber($serial_number);
 
             // Pastikan datanya bisa di-encode
             if (!$data) {
@@ -82,17 +101,15 @@ class Printer extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
-                'type' => $_POST['type'],
                 'serial_number' => $_POST['serial_number'],
                 'nama_counter' => $_POST['nama_counter'],
                 'cust_id' => $_POST['cust_id'],
-                'status' => $_POST['status'],
                 'keterangan' => $_POST['keterangan'],
                 'date_distribusi' => $_POST['date_distribusi'],
                 'remaks' => $_POST['remaks']
             ];
 
-            if ($this->model('Printer_models')->addPrinter($data) > 0) {
+            if ($this->model('Printer_models')->distribusiPrinter($data) > 0) {
                 Flasher::setFlash('berhasil', 'ditambahkan', 'success');
             } else {
                 Flasher::setFlash('gagal', 'ditambahkan', 'danger');
