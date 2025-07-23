@@ -20,6 +20,7 @@ class Print_service extends Controller
         $data['printer'] = $this->model('Printer_models')->getAllPrinterService();
         $data['counter'] = $this->model('Counter_models')->getAllCounter();
         $data['cabang'] = $this->model('Cabang_models')->getAllCabang();
+        $data['kembali'] = $this->model('Printer_models')->getAllPrintKembali();
         // Load view
         $this->view('templates/header', $data);
         $this->view('print_service/index', $data);

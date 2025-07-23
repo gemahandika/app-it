@@ -21,6 +21,12 @@ class Printer_models
         $this->db->query($sql);
         return $this->db->resultSet();
     }
+    public function getAllPrintKembali()
+    {
+        $sql = "SELECT * FROM $this->table WHERE keterangan = 'di Kembalikan' ORDER BY date_terima ASC";
+        $this->db->query($sql);
+        return $this->db->resultSet();
+    }
     public function getBySerialNumber($serial_number)
     {
         $this->db->query("SELECT * FROM $this->table WHERE serial_number = :serial_number");

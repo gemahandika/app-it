@@ -14,22 +14,29 @@ $(document).ready(function () {
   // ========================================
   // 1. INISIALISASI DATATABLES
   // ========================================
-  let table = $('#example').DataTable({
+ let table1 = $('#example').DataTable({
     scrollX: true,
     scrollCollapse: true,
     paging: true,
-    // fixedColumns: {
-    //     leftColumns: 3 // Kolom "Action" di sebelah kiri akan dibekukan
-    // },
     initComplete: function () {
-        if (window.location.pathname.includes('/counter')) {
-            setTimeout(() => {
-                Swal.close();
-            }, 400);
-        }
+      if (window.location.pathname.includes('/counter')) {
+        setTimeout(() => {
+          Swal.close();
+        }, 400);
+      }
     }
   });
-  table.columns.adjust().draw();
+  table1.columns.adjust().draw();
+
+  // Tabel kedua
+  let table2 = $('#example1').DataTable({
+    scrollX: true,
+    scrollCollapse: true,
+    paging: true,
+    // Tambahkan opsi tambahan sesuai kebutuhan
+  });
+  table2.columns.adjust().draw();
+
 
   // ========================================
   // 2. INISIALISASI SELECT2

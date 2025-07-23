@@ -23,23 +23,6 @@
                     <?php endforeach;
                     unset($_SESSION['flash_stack']); ?>
                 <?php endif; ?>
-
-                <!-- <div class="d-flex flex-wrap gap-2">
-                    <form id="formExportKaryawan" method="POST" action="<?= BASE_URL ?>/counter/export">
-                        <input type="hidden" name="section" id="export_section">
-                        <input type="hidden" name="gen" id="export_gen">
-                        <input type="hidden" name="usia" id="export_usia">
-                        <button type="submit" class="btn bg-cantik text-white btn-sm button-cantik">
-                            <i class="fa fa-download"></i> Download
-                        </button>
-                    </form>
-                    <form action="<?= BASE_URL ?>/counter/import" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="file_excel" accept=".xls,.xlsx,.csv" required>
-                        <button type="submit" class="btn bg-cantik text-white btn-sm button-cantik">
-                            <i class="fa fa-upload"></i> Upload Data
-                        </button>
-                    </form>
-                </div> -->
             </div>
             <div class="card-body">
                 <div id="tableWrapper">
@@ -218,4 +201,41 @@
             </div>
         </div>
     </div>
+
+
+    <div class="container-fluid px-4">
+        <h5 class="mt-4 fw-bold" style="border-bottom: 1px solid black;">Data Pergantian Printer </h5>
+        <div class="card mb-4 mt-4">
+            <div class="card-body">
+                <div id="tableWrapper">
+                    <table id="example1" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr class="bg-ungu text-white">
+                                <th class="small text-center">NO</th>
+                                <th class="small text-center">TYPE</th>
+                                <th class="small text-center">SERIAL NUMBER</th>
+                                <th class="small text-center">NAMA AGEN & KP</th>
+                                <th class="small text-center">CUST ID</th>
+                                <th class="small text-center">STATUS</th>
+                                <th class="small text-center">KETERANGAN</th>
+                                <th class="small text-center">DATE SERVICE</th>
+                                <th class="small text-center">REMAKS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="karyawanResult">
+                            <?php
+                            extract($data);
+                            require_once '../app/views/print_service/_partial_tabel_print_pergantian.php';
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 </main>
