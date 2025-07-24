@@ -868,5 +868,129 @@ $(document).ready(function () {
   });
 
 
+  // ========================================
+  // 26. MODAL TAMBAH KURIR
+  // ========================================
+  $('#modalTambahKurir').on('shown.bs.modal', function () {
+    $('#tambah-cabang_sca').select2({
+      dropdownParent: $('#modalTambahKurir'),
+      width: '100%'
+    });
+  });
+
+  // ========================================
+  // 27. SUBMIT TAMBAH KURIR
+  // ========================================
+  $(document).on('submit', '#formTambahKurir', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/kurir/tambah',
+      method: 'POST',
+      data: formData,
+      success: function (response) {
+        try {
+          const res = typeof response === 'string' ? JSON.parse(response) : response;
+          if (res.status === 'success') {
+            $('#modalTambahKurir').modal('hide');
+            Swal.fire({
+              icon: 'success',
+              title: 'Berhasil',
+              text: res.message
+            }).then(() => location.reload());
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal',
+              text: res.message || 'Gagal menyimpan data.'
+            });
+          }
+        } catch (err) {
+          console.error('Respon tidak valid JSON:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Respon dari server tidak dapat dibaca.'
+          });
+        }
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Terjadi kesalahan saat mengirim data.'
+        });
+      }
+    });
+  });
+
+// ========================================
+  // 28. MODAL EDIT KURIR
+  // ========================================
+  $(document).on('click', '.btn-editKurir', function () {
+    const id = $(this).data('id');
+    $.ajax({
+      url: BASE_URL + '/kurir/getKurirById',
+      method: 'POST',
+      data: { id_sca: id },
+      dataType: 'json',
+      success: function (data) {
+        $('#edit-id_sca').val(data.id_sca);
+        $('#edit-kurir_id').val(data.kurir_id);
+        $('#edit-password_sca').val(data.password_sca);
+        $('#edit-fullname_sca').val(data.fullname_sca);
+        $('#edit-nik_sca').val(data.nik_sca);
+        $('#edit-phone_sca').val(data.phone_sca);
+        $('#edit-zona_sca').val(data.zona_sca);
+        $('#edit-cabang_sca').val(data.cabang_sca.trim()).trigger('change');
+        $('#edit-status_sca').val(data.status_sca);
+        $('#edit-jobtask_sca').val(data.jobtask_sca);
+
+        const modal = new bootstrap.Modal(document.getElementById('modalEditKurir'));
+        modal.show();
+
+        $('#modalEditKurir').on('shown.bs.modal', function () {
+          $('#edit-cabang_sca').select2({
+            dropdownParent: $('#modalEditKurir'),
+            width: '100%'
+          });
+        });
+      },
+      error: function (xhr, status, error) {
+      console.error("Gagal ambil data:", error);
+      console.log("Respon server:", xhr.responseText); // ⬅️ ini bantu lihat error PHP
+      }
+    });
+  });
+
+  // ========================================
+  // 23. SUBMIT EDIT KURIR
+  // ========================================
+  $(document).on('submit', '#formEditKurir', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      url: BASE_URL + '/kurir/edit',
+      method: 'POST',
+      data: formData,
+      success: function () {
+        $('#modalEditKurir').modal('hide');
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Data Kurir berhasil diperbarui!'
+        }).then(() => location.reload());
+      },
+      error: function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Terjadi kesalahan saat mengupdate data.'
+        });
+      }
+    });
+  });
+
+
 
 });

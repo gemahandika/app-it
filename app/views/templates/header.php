@@ -67,7 +67,7 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                 <div class="sb-sidenav-menu">
                     <?php
                     $currentPage = basename($_SERVER['REQUEST_URI']);
-                    $isUsers = in_array($currentPage, ['user_hybrid', 'user_sca']);
+                    $isUsers = in_array($currentPage, ['user_hybrid', 'kurir']);
                     $isCounter = in_array($currentPage, ['counter', 'counter_tutup']);
                     $isPrinter = in_array($currentPage, ['printer', 'print_service', 'print_stok']);
                     ?>
@@ -100,7 +100,7 @@ Flasher::loginFlash(); // Tampilkan pesan jika ada
                         <div class="collapse <?= $isUsers ? 'show' : '' ?>" id="collapseUser" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link <?= $currentPage === 'user_hybrid' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/user_hybrid">User Hybrid</a>
-                                <a class="nav-link <?= $currentPage === 'user_sca' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/user_sca">User SCA</a>
+                                <a class="nav-link <?= $currentPage === 'kurir' ? 'active' : '' ?>" href="<?= BASE_URL; ?>/kurir">ID Kurir</a>
                             </nav>
                         </div>
                         <!-- Data Printer Menu -->
