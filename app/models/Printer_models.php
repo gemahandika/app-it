@@ -11,7 +11,7 @@ class Printer_models
     }
     public function getAllPrinter()
     {
-        $sql = "SELECT * FROM $this->table WHERE keterangan != 'di Service' AND keterangan != 'Stok' ORDER BY id_printer DESC";
+        $sql = "SELECT * FROM $this->table WHERE keterangan = 'di Agen' AND keterangan = 'di Kp & Opr' ORDER BY id_printer DESC";
         $this->db->query($sql);
         return $this->db->resultSet();
     }
